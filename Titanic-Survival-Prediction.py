@@ -24,7 +24,7 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 pd.set_option('display.width', 320)
 
-relative_path = 'train.csv'
+relative_path = 'train_dataset.csv'
 titanic_data = pd.read_csv(relative_path)
 
 
