@@ -1,103 +1,52 @@
-﻿STAT 3011
-
-
-Titanic Survival Prediction
-with 
-Machine Learning
-
-
-  
-
-
-
-
-
-Group 7
-
-
-CHAN Hoi Ching         1155125751
-CHAN Kwan Yue         1155144322
-LAU Ka Keung 1155142681
-LEUNG Wan Hoi         1155142877
-TSANG Chor KI         1155143026
+Project: Titanic Survival Prediction with Machine Learning
          
 Abstract
-Cruise vacation is getting more and more popular nowadays due to the pandemic situation, predicting the previous cruise accident survival would help prevent death if there is a cruise accident. Therefore, the Titanic iceberg accident is taken into the investigation. In the project, the titanic survival dataset is used to make predictions with machine learning by using the programming language, Python, to get useful insights from various attributes in the data so that the relevant cruise companies and the government from different countries would do some measure and make some regulations to help reduce the death rate in case there is an accident. It is found that there are strong relationships between by finding out the correlations among different variables. Logistic Regression, Decision Tree, Random Forest and Linear Regression are implemented for making predictions of the titanic iceberg accident survival while Decision Tree has the best accuracy with the lowest root mean squared error(0.0937).
+Cruise vacation is getting more and more popular nowadays due to the pandemic situation, predicting the previous cruise accident survival would help prevent death if there is a cruise accident. Therefore, the Titanic iceberg accident is taken into investigation. In the project, the Titanic survival dataset is used to make predictions with machine learning by using the programming language, Python, to get useful insights from various attributes in the data so that the relevant cruise companies and the government from different countries would do some measure and make some regulations to help reduce the death rate in case there is an accident. It is found that there are strong relationships between by finding out the correlations among different variables. Logistic Regression, Decision Tree, Random Forest and Linear Regression are implemented for making predictions of the Titanic iceberg accident survival while Decision Tree has the best accuracy with the lowest root mean squared error(0.0937).
 
 
 ________________
 
-
-
-
 1. Introduction
 Due to the recent pandemic situation, most of us are not able to travel abroad. Instead, having a cruise vacation will be a good alternative option. Therefore, we are interested in exploring the survival rate of cruise passengers if an accident occurs. And, Titanic would be a great sample for us to work on.
-April 15, 1912 at 2:20 a.m.,
-The 'unsinkable' Titanic sank in the North Atlantic Ocean with nearly 1,500 killed. Titanic symbolises state-of-the-art shipping technology 1910s. Before the accident, the titanic had already travelled 1,451 miles. It was 852 feet long, displaced
+April 15, 1912, at 2:20 a.m.,
+The 'unsinkable' Titanic sank in the North Atlantic Ocean with nearly 1,500 killed. Titanic symbolises state-of-the-art shipping technology 1910s. Before the accident, the Titanic had already travelled 1,451 miles. It was 852 feet long, displaced
 52,310 tons and was equipped with systems of seal bulkheads, believed to cause
-Ships not sinking. During Titanic's maiden voyage, it hit an iceberg, creating a 300-foot-long rift on its side and flooded five bulkheads. Three hours after Titanic hit the iceberg, its bulkheads were gradually cultivated with water and then sunk. 
+Ships not sinking. During Titanic's maiden voyage, it hit an iceberg, creating a 300-foot-long rift on its side and flooded five bulkheads. Three hours after the Titanic hit the iceberg, its bulkheads were gradually cultivated with water and then sunk. 
 In this fatal and grave accident, plentiful people think that the chances of survival depend greatly on the class couriers of the passengers. Moreover, the other information, ranging from age to gender, from height to weight are also determining factors whether the passengers can survive in the accident.
 In this project, there are three objectives. The first one would be the recognition of Titanic Survivors. The second objective would be finding out the indicative features of Titanic survivors. The third one would be figuring out the classification method of the lowest error and highest accuracy. 
 
 
 2. Data
-
-
 2.1 Dataset
 The dataset used in the project is extracted from kaggle. It consists of 1,309 passengers information of 7 variables, including embarked, passenger class, fare, parch, number of siblings/spouses abroad Titanic, age and sex. The information is used to indicate whether the passenger can or cannot survive from the iceberg accident.
-
 
 2.2 Data Cleaning
 By using the function isnull().sum(), we know that there are missing values in the column age, cabin and embarked. 891 values should be the complete values in  each column but there are 177 missing values in “Age” column, 687 missing values in “Cabin”column and 2 missing values in “Embarked”column. 
 
-
 For the “Age”column, we cannot just delete this column directly from our dataset because only about 20% values are missing. We decided to find the mean value in the “Age” column and replace the 177 missing values with this mean value.
 
+For the “Embarked”column, we cannot delete this column directly from our dataset because only about 0.2% values are missing. Also, we cannot calculate the mean value in this column because it is a  categorical column and the value is in the form of text. In this case, we decided to find the mode in the “Embarked” column and replace the 2 missing values with the mode.
 
-For the “Embarked”column, we cannot delete this column directly from our dataset because only about 0.2% values are missing. Also, we cannot calculate the mean value in this column because it is a  categorical column and the value is in the form of text. In this case, we decided to find the mode in the “Embarked”column and replace the 2 missing values with the mode.
+For the categorical column like the “Sex” column and the “Embarked”column, we will also convert them into numerical columns in order to train our models.
 
-
-For the categorical column like “Sex”column and “Embarked”column, we will also convert them into numerical columns in order to train our models.
-
-
-Finally, we will separate the features and target columns. For the features part, we will delete the “passenger id”column, “name”column, “ticket”column and “survived” column. For the target part, we only select the “ survived” column.
-
+Finally, we will separate the features and target columns. For the features part, we will delete the “passenger id” column, “name”column, “ticket” column and “survived” column. For the target part, we only select the “ survived” column.
 
 2.3 Data Reduction
-Most of the values in the “Cabin”column are missing, only about 200 values are present. Since most of the values in this column are missing, it’s meaningless for us to do the data cleaning process like find the mean or mode of this column. Therefore, we decided to use a data reduction method that deletes this column from our dataset.
-
-
+Most of the values in the “Cabin” column are missing, only about 200 values are present. Since most of the values in this column are missing, it’s meaningless for us to do the data cleaning process like finding the mean or mode of this column. Therefore, we decided to use a data reduction method that deletes this column from our dataset.
 
 
 3. Methodology
 3.1 Logistic Regression
 Logistic Regression is a machine learning model used for predictive analytics, modelling and extends to application. It solves classification problems. In the analytics method, the dependent variable is finite or categorical. There are three types of logistic regression. Firstly, binomial logistic regression is used to solve the situations where the target variables have only two possible values, 0 or 1. The result can be Yes/No, True/False or other categorical value. Secondly, ordinal logistic regression classifies the problem into 3 or more values. The figures aren't quantitatively significant. Like ‘cat’, ‘dog’, ‘cow’. Lastly, multinomial logistic regression is similar to ordinal logistic regression. The difference is the values are well ordered. Such as the result of MBI value as ‘High’, ‘Average’, ‘Low’.
 
-
 By using logistic regression to estimate the probabilistic values which lie between 0 and 1, we recognize the relationship between one or more independent variables and the dependent variable. The logistic function, which is also known as sigmoid function, is used to squeeze the output of a linear equation between 0 and 1 and a S-form curve formed.
-
-
-
-
-  
-  
 
 In the case of categorical values, logistic regression used the sigmoid function to create predictions. It usually sets 0.5 as the cut-off point value and gives the dataset's projected output in the form of the category to which it belongs. For example, if the output is below the cut-off point, the prediction output will be given as No, otherwise Yes if the output exceeds 0.5.
 
-
 In our project, binomial logistic regression is used to indicate whether the passenger can or cannot survive from the iceberg accident, the result is represented as 0 (cannot survive) or 1 (survive).
-
-
-
-
-
-
-
 
 3.2 Decision Tree
 A Decision Tree is a machine learning model in which is to create a training model that can be used to predict the class of a given dataset by applying distinct decision rules. There are two types of decision trees, namely categorical variable decision trees and continuous variable decision trees. They solve classification and regression problems respectively.
-   
-
 
 Starting from top to bottom:
 Step1: Begin the tree with the root node, we select the decision rule which has the largest information gain to split the node
@@ -105,47 +54,30 @@ Step2: Split child node with considering decision rule never selected before in 
 Step3: Stop splitting if there are no decision rules left / group impurity equals zero
 Note: To prevent overfitting / numerous splitting, pruning and early stop may be applied 
 
-
 Gini impurity
-  
  
 If the impurity tends to zero, the more ideal the situation.
 
-
 Information gain (IG)
   
-  
-
-
-
 In our project, we select categorical variable decision trees to solve the classification problems. We apply the decision rules (e.g. Is he/she aged above 30? Is he/she male?) based on distinct categories (e.g. ages, sex, embarked, etc) that could optimize our training model.
 In each attribute, we calculate entropy using the equation:
        Entropy(s)= -Pyes log2 (Pyes) - Pno log2 (Pno)
 	where Pyes = probability of yes, Pno = probability of no
 3.3 Random Forest
 
-
-  
-
 3.4 Support Vector Machine (SVM)
 The basic principle of SVM is as follows.
 
-
 For simplicity, the setup for the example data will include only two labels, blue and red, determined by two factors, x and y, respectively.
 
-
 The required classifier would be a machine that takes these two factors in and outputs a classification label.
-  
-  
 
 SVM would take the data and create the hyperplane that best separates the labels. Imagine that the hyperplane is the decision boundary. Data that fall on one side will be defined as blue, and data that fall on the other side will be defined as red.
 
-
 The best hyperplane maximises the margin of the two labels.
 
-
 In our project dataset, diabetics and nondiabetics are not classified using one or two factors, but two labels (diabetic and nondiabetic) are defined by a broad range of factors - such as passenger class, age, gender, fare, embarked, parch as well as number of spouse/siblings. To make it simple to understand, the data studied in the project are non-linear data.
-
 
 3.5 Neural Network Classifier
 Neural network is a type of deep learning model which results in a sequence of layers. By transmitting signals in between different neuron layers based on the connected network, it simulates the decision making process in the human brain’s synapses’ interaction.
@@ -154,37 +86,11 @@ In our project, we apply sigmoid as our activation function since its function o
        
          Sigmoid activation function:                    Sigmoid activation function:
   
-  
-
-       
-  
-  
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Also, we apply two layers, “sigmoid” with nodes and “rule” with nodes consecutively. The neurons within the network interact with the neurons in the next layer and eventually classify them as our desired outcomes(0 or 1).
 
 
 For the optimization, we selected Adam (Adaptive Moment Estimation) which works with momentums of first and second order.
           First order momentums                    Second order momentums    
-
-
-
-
-
 
 The advantages are it converges rapidly and decelerates the learning rate.
 
@@ -192,9 +98,6 @@ The advantages are it converges rapidly and decelerates the learning rate.
 For the loss function, we select binary-entropy loss, appropriate in binary classification settings to get one of two potential outcomes.
 Loss function : 
 L = - ( yi log (yi) + (1- yi) log (1 - yi ) )
-	
-
-
 
 3.6 Naive Bayes Classifier
 Naive Bayes is a classifier that uses Bayes' theorem. It predicts probabilities for each class, such as the probability that a record or data belongs to a specific class. The class with the highest probability is defined as the class with the highest likelihood. The membership probability is well-known as maximum a posteriori probability (MAP).
